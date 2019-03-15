@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+
+  ringsteki-client:
+    image: node:11.11.0
+    command: bash -c "cd /app; npm install; HOST=0.0.0.0 npm run start"
+    ports:
+      - 8080:8080
+    volumes:
+      - ./ringsteki-client:/app:cached
+    depends_on: 
+      - ringsteki-server
+  
+  ringsteki-server:
+    image: node:11.11.0
+    command: bash -c "cd /app; npm install; node ."
+    ports:
+      - 4000:4000
+    volumes:
+      - ./ringsteki-server:/app:cached
+    depends_on: 
+      - mongo
+  
+  mongo:
+    image: mongo
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    depends_on: 
+      - mongo

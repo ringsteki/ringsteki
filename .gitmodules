@@ -1,0 +1,8 @@
+[submodule "ringsteki-server"]
+	path = ringsteki-server
+	url = git@github.com:ringsteki/ringsteki-server.git
+	branch = master
+[submodule "ringsteki-client"]
+	path = ringsteki-client
+	url = git@github.com:ringsteki/ringsteki-client.git
+	branch = master
