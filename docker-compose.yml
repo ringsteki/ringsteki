@@ -4,7 +4,7 @@ services:
 
   ringsteki-client:
     image: node:11.11.0
-    command: bash -c "cd /app; npm install; HOST=0.0.0.0 npm run start"
+    command: bash -c "cd /app; npm install; HOST=0.0.0.0 SERVER_HOST=ringsteki-server npm run start"
     ports:
       - 8080:8080
     volumes:
