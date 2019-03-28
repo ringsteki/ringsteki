@@ -14,7 +14,7 @@ services:
   
   ringsteki-server:
     image: node:11.11.0
-    command: bash -c "cd /app; npm install; node ."
+    command: bash -c "cd /app; npm install; mkdir -p server/logs; node ."
     ports:
       - 4000:4000
     volumes:
