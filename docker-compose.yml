@@ -4,7 +4,8 @@ services:
 
   ringsteki-client:
     image: node:11.11.0
-    command: bash -c "cd /app; npm install; HOST=0.0.0.0 SERVER_HOST=ringsteki-server npm run start"
+    command: bash -c "npm install; HOST=0.0.0.0 SERVER_HOST=ringsteki-server npm run start"
+    working_dir: /app
     ports:
       - 8080:8080
     volumes:
@@ -14,9 +15,11 @@ services:
   
   ringsteki-server:
     image: node:11.11.0
-    command: bash -c "cd /app; npm install; mkdir -p server/logs; node ."
+    command: bash -c "npm install; mkdir -p server/logs; node ."
+    working_dir: /app
     ports:
       - 4000:4000
+      - 9229:9229
     volumes:
       - ./ringsteki-server:/app:cached
     depends_on: 
