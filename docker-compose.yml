@@ -20,6 +20,8 @@ services:
     ports:
       - 4000:4000
       - 9229:9229
+      - 9500:9500
+      - 6000:6000
     volumes:
       - ./ringsteki-server:/app:cached
     depends_on: 
