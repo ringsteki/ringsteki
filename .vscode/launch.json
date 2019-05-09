@@ -4,12 +4,21 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+
     {
-      "name": "Docker: Attach to Node",
+      "name": "Server",
       "type": "node",
       "request": "attach",
       "localRoot": "${workspaceFolder}/ringsteki-server",
       "remoteRoot": "/app"
+    },
+    {
+      "name": "Gamenode",
+      "type": "node",
+      "request": "attach",
+      "localRoot": "${workspaceFolder}/ringsteki-server",
+      "remoteRoot": "/app",
+      "port":9230
     }
   ]
 }
