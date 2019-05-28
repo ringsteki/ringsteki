@@ -6,11 +6,19 @@ jobs:
 
     steps:
       - checkout
+      - run:
+          name: Pull submodules
+          command: git submodule update --init --recursive
+      - run:
+          name: Build Client
+          command: |
+            echo "Installing dependencies"
+            npm install
+            npm run build
+            npm run build-vendor 
+          working_directory: ringsteki-client
 
       - run:
-          name: Greeting
-          command: echo Hello, world.
-
-      - run:
-          name: Print the Current Time
-          command: date
+          name: Build Server
+          command: |
+            echo "Building server"
