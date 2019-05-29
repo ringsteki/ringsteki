@@ -14,8 +14,10 @@ jobs:
           command: |
             echo "Installing dependencies"
             npm install
-            npm run build
+            echo "building vendor deps"
             npm run build-vendor 
+            echo "building client"
+            npm run build
           working_directory: ringsteki-client
 
       - run:
