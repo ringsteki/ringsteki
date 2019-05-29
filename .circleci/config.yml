@@ -10,16 +10,17 @@ jobs:
           name: Pull submodules
           command: git submodule update --init --recursive
       - run:
-          name: Build Client
-          command: |
-            echo "Installing dependencies"
-            npm install
-            echo "building vendor deps"
-            npm run build-vendor 
-            echo "building client"
-            npm run build
+          name: Installing client dependencies
+          command: npm install
           working_directory: ringsteki-client
-
+      - run:
+          name: Building client vendor code
+          command: npm run build-vendor
+          working_directory: ringsteki-client
+      - run:
+          name: Build Client
+          command: npm run build
+          working_directory: ringsteki-client
       - run:
           name: Build Server
           command: |
