@@ -36,7 +36,4 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - build
-      - deploy-to-heroku/docker-build-release
-        app-name: "ringsteki"
-        app-type: "web"
+        - build
