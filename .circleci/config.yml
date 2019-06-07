@@ -31,8 +31,6 @@ jobs:
             cp -R ringsteki-client/assets/* ringsteki-server/public
             cp ringsteki-client/assets.json ringsteki-server/.
             cp ringsteki-client/vendor-assets.json ringsteki-server/.
-      - run:
-          name: build and push to Heroku
 workflows:
   version: 2
   build_and_deploy:
