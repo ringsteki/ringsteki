@@ -33,5 +33,8 @@ jobs:
             cp ringsteki-client/vendor-assets.json ringsteki-server/.
       - heroku/install
       - run:
-          name: Check Heroku version
-          command: heroku --version
+          name: Build docker image and push to Heroku
+          command: heroku container:push web
+      - run:
+          name: release it!
+          command: heroku container:release web
