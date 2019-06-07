@@ -34,7 +34,7 @@ jobs:
       - heroku/install
       - run:
           name: Build docker image and push to Heroku
-          command: heroku container:push web
+          command: heroku container:push web -a ringsteki
       - run:
           name: release it!
-          command: heroku container:release web
+          command: heroku container:release web -a ringsteki
