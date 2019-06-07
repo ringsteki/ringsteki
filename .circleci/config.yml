@@ -34,6 +34,7 @@ jobs:
       - run:
           name: build and push to Heroku
 workflows:
+  version: 2
   build_and_deploy:
     jobs:
         - build
