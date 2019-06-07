@@ -36,4 +36,8 @@ workflows:
   build_and_deploy:
     jobs:
         - build
-        - deploy-to-heroku/docker-build-release
+        - deploy-to-heroku/docker-build-release:
+            requires:
+              - build
+            app-name: ringsteki
+            app-type: web
