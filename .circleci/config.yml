@@ -41,5 +41,8 @@ jobs:
           name: Build docker image and push to Heroku Repository
           command: heroku container:push web -a ringsteki
       - run:
+          name: Update DB
+          command: npm run fetchdata
+      - run:
           name: Release it!
           command: heroku container:release web -a ringsteki
