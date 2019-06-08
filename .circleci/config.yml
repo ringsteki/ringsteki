@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@0.0.8
 jobs:
-  build:
+  build_and_deploy:
     docker:
       - image: circleci/node:lts
 
@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Release it!
           command: heroku container:release web -a ringsteki
-  provision_db:
+  update_card_data_in_db:
     docker:
       - image: circleci/node:lts
     steps:
@@ -62,4 +62,5 @@ jobs:
 workflows:
   build_and_provision:
     jobs:
-      - provision_db
+      - build_and_deploy
+      - update_card_data_in_db
