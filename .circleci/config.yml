@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@0.0.8
 jobs:
-  build_and_deploy:
+  build:
     docker:
       - image: circleci/node:lts
 
@@ -32,17 +32,9 @@ jobs:
             cp -R ringsteki-client/assets/* ringsteki-server/public
             cp ringsteki-client/assets.json ringsteki-server/.
             cp ringsteki-client/vendor-assets.json ringsteki-server/.
-      - heroku/install
-      - run:
-          name: Login into Heroku Docker Repository
-          command: |
-            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
-      - run:
-          name: Build docker image and push to Heroku Repository
-          command: heroku container:push web -a ringsteki
-      - run:
-          name: Release it!
-          command: heroku container:release web -a ringsteki
+      - persist_to_workspace:
+          root: .
+          path: ringsteki-server
   update_card_data_in_db:
     docker:
       - image: circleci/node:lts
@@ -59,8 +51,29 @@ jobs:
           name: Update DB
           command: npm run fetchdata
           working_directory: ringsteki-server
+  deploy:
+    docker:
+      - image: circle/node:lts
+    steps:
+      - attach_workspace:
+          at: .
+      - heroku/install
+      - run:
+          name: Login into Heroku Docker Repository
+          command: |
+            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
+      - run:
+          name: Build docker image and push to Heroku Repository
+          command: heroku container:push web -a ringsteki
+      - run:
+          name: Release it!
+          command: heroku container:release web -a ringsteki
 workflows:
-  build_and_provision:
+  build_provision_deploy:
     jobs:
-      - build_and_deploy
+      - build
       - update_card_data_in_db
+      - deploy:
+          requires:
+            - build
+            - update_card_data_in_db
