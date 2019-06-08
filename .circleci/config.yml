@@ -43,6 +43,7 @@ jobs:
       - run:
           name: Update DB
           command: npm run fetchdata
+          working_directory: ringsteki-server
       - run:
           name: Release it!
           command: heroku container:release web -a ringsteki
