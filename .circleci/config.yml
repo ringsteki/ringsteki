@@ -41,9 +41,21 @@ jobs:
           name: Build docker image and push to Heroku Repository
           command: heroku container:push web -a ringsteki
       - run:
-          name: Update DB
-          command: npm run fetchdata
-          working_directory: ringsteki-server
-      - run:
           name: Release it!
           command: heroku container:release web -a ringsteki
+  provision_db:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - run:
+        name: Install dependencies
+        command: npm install
+        working_directory: ringsteki-server
+      - run:
+        name: Update DB
+        command: npm run fetchdata
+        working_directory: ringsteki-server
+workflows:
+  build_and_provision:
+    jobs:
+      - provision_db
