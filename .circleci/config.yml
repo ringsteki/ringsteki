@@ -47,14 +47,15 @@ jobs:
     docker:
       - image: circleci/node:lts
     steps:
+      - checkout
       - run:
-        name: Install dependencies
-        command: npm install
-        working_directory: ringsteki-server
+          name: Install dependencies
+          command: npm install
+          working_directory: ringsteki-server
       - run:
-        name: Update DB
-        command: npm run fetchdata
-        working_directory: ringsteki-server
+          name: Update DB
+          command: npm run fetchdata
+          working_directory: ringsteki-server
 workflows:
   build_and_provision:
     jobs:
