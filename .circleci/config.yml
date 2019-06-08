@@ -34,7 +34,8 @@ jobs:
             cp ringsteki-client/vendor-assets.json ringsteki-server/.
       - persist_to_workspace:
           root: .
-          path: ringsteki-server
+          paths: 
+            - ringsteki-server
   update_card_data_in_db:
     docker:
       - image: circleci/node:lts
