@@ -7,7 +7,6 @@ jobs:
       - image: circleci/node:lts
 
     steps:
-      - setup_remote_docker
       - checkout
       - run:
           name: Pull submodules
@@ -54,8 +53,9 @@ jobs:
           working_directory: ringsteki-server
   deploy:
     docker:
-      - image: circle/node:lts
+      - image: circleci/node:lts
     steps:
+      - setup_remote_docker
       - attach_workspace:
           at: .
       - heroku/install
